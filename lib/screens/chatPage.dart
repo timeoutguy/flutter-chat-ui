@@ -1,4 +1,5 @@
 import 'package:chat_app/models/chatUserModel.dart';
+import 'package:chat_app/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
@@ -117,6 +118,20 @@ class _ChatPageState extends State<ChatPage> {
                           color: Colors.grey.shade100,
                         ))),
               ),
+            ),
+            ListView.builder(
+              itemCount: chatUsers.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.only(top: 16),
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return ConversationList(
+                    name: chatUsers[index].name,
+                    messageText: chatUsers[index].messageText,
+                    imageUrl: chatUsers[index].imageURL,
+                    time: chatUsers[index].time,
+                    isMessageRead: (index == 0 || index == 3) ? true : false);
+              },
             )
           ],
         ),
